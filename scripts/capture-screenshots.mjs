@@ -76,7 +76,8 @@ async function capture(filename, fixture, prepare, description) {
   const context = await browser.newContext({ viewport: VIEWPORT, deviceScaleFactor: 1, locale: "ja-JP", timezoneId: "Asia/Tokyo", colorScheme: "light", reducedMotion: "reduce", serviceWorkers: "allow" });
   try {
     // Preserve the SDK queue without reporting synthetic screenshots as usage.
-    await context.route(/\/_vercel\/insights\/|^https:\/\/va\.vercel-scripts\.com\//, async (route) => {
+    // Match both the stable SDK URL and Vercel's hashed production endpoints.
+    await context.route(/\/_vercel\/insights\/|^https:\/\/va\.vercel-scripts\.com\/|\/[a-f0-9]{16}\/(?:script\.js|view|event|session)(?:\?|$)/, async (route) => {
       if (route.request().resourceType() === "script") {
         await route.fulfill({ status: 200, contentType: "application/javascript", body: "/* Portfolio capture: synthetic Analytics delivery disabled. */" });
       } else {

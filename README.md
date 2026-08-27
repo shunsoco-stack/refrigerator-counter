@@ -6,8 +6,8 @@
 
 食品の在庫管理も、献立の提案も、実際の冷蔵庫との連携もありません。数えるのは、あなたがボタンを押した回数だけです。
 
-- 公開予定 URL（本番公開は未検証）：[refrigerator-counter.vercel.app](https://refrigerator-counter.vercel.app)
-- 公開予定リポジトリ（公開状態は未検証）：[shunsoco-stack/refrigerator-counter](https://github.com/shunsoco-stack/refrigerator-counter)
+- 公開アプリ：[refrigerator-counter.vercel.app](https://refrigerator-counter.vercel.app)
+- GitHub 公開リポジトリ：[shunsoco-stack/refrigerator-counter](https://github.com/shunsoco-stack/refrigerator-counter)
 - [検証手順・実施記録](docs/verification.md) / [掲載用紹介文](docs/publish-copy.md)
 
 ## できること
@@ -26,7 +26,7 @@
 
 ## スクリーンショット
 
-以下の 5 枚は、公開 URL を Playwright で操作して取得するスクリーンショットの保存先です。撮影では日時を固定し、撮影専用の模擬記録を使用します。実利用者の記録や利用実績を示すものではありません。現時点では撮影未実施です。取得日時・対象 URL・検証状況は[検証記録](docs/verification.md)に記載します。
+2026 年 8 月 27 日、公開アプリを Playwright で操作して取得した 5 枚です（1440 × 1280px）。撮影では日時を 2026 年 8 月 30 日 12:00（日本時間）に固定し、撮影専用の模擬記録を使用しています。実利用者の記録や利用実績を示すものではありません。対象 URL・検証結果は[検証記録](docs/verification.md)にまとめています。
 
 ### 1. 初期画面
 
@@ -99,7 +99,7 @@ CSV は全記録を時刻順に出力し、日本語ヘッダー・UTF-8 BOM・C
 | テスト | Vitest / Playwright / ESLint / TypeScript |
 | 計測 | Vercel Web Analytics |
 | PWA | Web App Manifest / Service Worker |
-| 公開先 | Vercel / GitHub 公開リポジトリを予定 |
+| 公開先 | Vercel / GitHub 公開リポジトリ |
 
 コア機能に外部の有料 API、API キー、データベースは必要ありません。
 
@@ -180,6 +180,15 @@ Vercel Web Analytics を組み込み、ページ閲覧と主要操作の匿名�
 
 ## 検証・公開について
 
-ローカルのリリースビルドで lint・typecheck・build、単体テスト 79 件、Playwright E2E 24 件の成功を確認しています。オフライン再読み込み、2 タブ同時記録、保存失敗からの復旧も検証対象です。公開 URL・Secret Scan・スクリーンショットの最終結果は[検証記録](docs/verification.md)にまとめます。
+lint・typecheck・build、単体テスト 79 件、Playwright E2E 24 件に成功しています。E2E はローカル本番ビルドと公開 URL の両方で実施し、オフライン再読み込み、2 タブ同時記録、保存失敗からの復旧も確認済みです。Gitleaks 8.30.0 による作業ファイル・全 Git 履歴の Secret Scan は検出 0 件。詳細は[検証記録](docs/verification.md)を参照してください。
 
-公開時は独立した `refrigerator-counter` リポジトリを Vercel に接続し、Next.js プロジェクトとして Node.js 24.x でビルドします。秘密情報をコミットせず、公開前に Secret Scan を実施してください。README の URL は現時点の想定値であり、実際の公開 URL・公開リポジトリを確認した後に更新します。
+独立した `refrigerator-counter` リポジトリと Vercel プロジェクトに公開しています。Vercel は Next.js / Node.js 24.x に設定し、本番ビルド・HTTPS 公開を確認済みです。GitHub 自動デプロイ連携は現在の権限では接続できなかったため、CLI でデプロイしています。GitHub への push だけでは公開アプリは更新されません。
+
+所有者が更新を公開する場合は、テストと Secret Scan の後、対象プロジェクトへのリンクを確認して実行します。
+
+```sh
+npx vercel link --yes --project refrigerator-counter --scope shunsoco-stacks-projects
+npx vercel deploy --prod --yes --scope shunsoco-stacks-projects
+```
+
+`.vercel/`、`.env*`、ローカルのテスト結果・一時ファイルは Git とデプロイの対象外です。生成された認証情報はコミットしないでください。

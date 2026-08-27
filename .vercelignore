@@ -1,0 +1,16 @@
+.git/
+.vercel/
+.next/
+node_modules/
+.env*
+tmp/
+test-results/
+playwright-report/
+.playwright-cli/
+coverage/
+.npm-cache/
+.cache/
+*.log
+*.tsbuildinfo
+.DS_Store
+Thumbs.db

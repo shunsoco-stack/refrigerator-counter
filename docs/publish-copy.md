@@ -1,10 +1,10 @@
 # 掲載用コピー
 
-公開確認前の草稿です。下記 URL は想定値のため、実際の公開確認後に差し替え・確認してから使用してください。このファイルの作成は外部サービスへの投稿・掲載を意味しません。
+公開確認済みのアプリを紹介するための文章です。このファイルの作成は、外部サービスへの投稿・掲載を意味しません。
 
 - アプリ名：冷蔵庫カウンター
-- 公開予定 URL：https://refrigerator-counter.vercel.app
-- 公開予定 GitHub：https://github.com/shunsoco-stack/refrigerator-counter
+- 公開 URL：https://refrigerator-counter.vercel.app
+- GitHub：https://github.com/shunsoco-stack/refrigerator-counter
 
 ## ポートフォリオ紹介文
 

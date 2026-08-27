@@ -30,7 +30,8 @@ function weeklyState(): CounterState {
 async function stopAnalyticsDelivery(context: BrowserContext): Promise<void> {
   // The real SDK still initializes window.va/vaq. Its delivery script is replaced
   // with a no-op so synthetic events never pollute the public app's analytics.
-  await context.route(/\/_vercel\/insights\/|^https:\/\/va\.vercel-scripts\.com\//, async (route) => {
+  // Vercel production can rewrite these endpoints under a 16-character hash.
+  await context.route(/\/_vercel\/insights\/|^https:\/\/va\.vercel-scripts\.com\/|\/[a-f0-9]{16}\/(?:script\.js|view|event|session)(?:\?|$)/, async (route) => {
     if (route.request().resourceType() === "script") {
       await route.fulfill({ status: 200, contentType: "application/javascript", body: "/* E2E: preserve the real Analytics SDK queue without sending synthetic events. */" });
     } else {
