@@ -1,0 +1,17 @@
+title = "refrigerator-counter secret scan"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Generated dependencies, build output, local-only reports, and Git internals"
+paths = [
+  '''(^|[\\/])node_modules[\\/]''',
+  '''(^|[\\/])\.next[\\/]''',
+  '''(^|[\\/])\.vercel[\\/]''',
+  '''(^|[\\/])\.git[\\/]''',
+  '''(^|[\\/])tmp[\\/]''',
+  '''(^|[\\/])test-results[\\/]''',
+  '''(^|[\\/])playwright-report[\\/]''',
+  '''(^|[\\/])coverage[\\/]'''
+]
